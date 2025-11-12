@@ -1,0 +1,68 @@
+{% load hermes_tags %}
+<div class="hermes-notification-widget">
+    <div class="hermes-notification-header">
+        <h5>
+            Notifications 
+            {% if unread_count > 0 %}
+                <span class="badge badge-danger">{{ unread_count }}</span>
+            {% endif %}
+        </h5>
+    </div>
+    
+    <div class="hermes-notification-list">
+        {% if notifications %}
+            {% for notification in notifications %}
+                {% hermes_notification_item notification %}
+            {% endfor %}
+        {% else %}
+            <div class="hermes-notification-empty">
+                <p class="text-muted">No notifications</p>
+            </div>
+        {% endif %}
+    </div>
+    
+    {% if notifications|length == max_items %}
+        <div class="hermes-notification-footer">
+            <a href="#" class="text-primary">View all notifications</a>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+.hermes-notification-widget {
+    max-width: 400px;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    background: white;
+}
+
+.hermes-notification-header {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+}
+
+.hermes-notification-header h5 {
+    margin: 0;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hermes-notification-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.hermes-notification-empty {
+    padding: 2rem;
+    text-align: center;
+}
+
+.hermes-notification-footer {
+    padding: 0.5rem 1rem;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+}
+</style>

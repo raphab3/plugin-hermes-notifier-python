@@ -1,0 +1,103 @@
+{% load hermes_tags %}
+<div class="hermes-notification-item {{ notification.priority|hermes_priority_class }}{% if not notification.is_read %} unread{% endif %}">
+    <div class="hermes-notification-content">
+        <div class="hermes-notification-header">
+            <h6 class="hermes-notification-title">{{ notification.title }}</h6>
+            <small class="hermes-notification-time text-muted">
+                {{ notification.created_at|hermes_time_ago }}
+            </small>
+        </div>
+        
+        <div class="hermes-notification-body">
+            {{ notification.body }}
+        </div>
+        
+        <div class="hermes-notification-meta">
+            <small class="text-muted">{{ notification.source_system }}</small>
+            {% if show_actions %}
+                <div class="hermes-notification-actions">
+                    {% if not notification.is_read %}
+                        <button class="btn btn-sm btn-outline-primary" 
+                                onclick="markHermesNotificationRead('{{ notification.id }}')">
+                            Mark Read
+                        </button>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+.hermes-notification-item {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f1f3f4;
+    transition: background-color 0.2s;
+}
+
+.hermes-notification-item:hover {
+    background-color: #f8f9fa;
+}
+
+.hermes-notification-item.unread {
+    background-color: #e3f2fd;
+    border-left: 4px solid #2196f3;
+}
+
+.hermes-notification-item.notification-high {
+    border-left: 4px solid #ff9800;
+}
+
+.hermes-notification-item.notification-critical {
+    border-left: 4px solid #f44336;
+    background-color: #ffebee;
+}
+
+.hermes-notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.hermes-notification-title {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    flex: 1;
+}
+
+.hermes-notification-body {
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.hermes-notification-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hermes-notification-actions {
+    display: flex;
+    gap: 0.25rem;
+}
+</style>
+
+<script>
+function markHermesNotificationRead(notificationId) {
+    // This would integrate with your Django backend
+    // For now, just hide the read button
+    event.target.style.display = 'none';
+    
+    // You can implement AJAX call to mark as read endpoint
+    // fetch('/api/notifications/' + notificationId + '/mark-read/', {
+    //     method: 'POST',
+    //     headers: {
+    //         'X-CSRFToken': getCookie('csrftoken'),
+    //         'Content-Type': 'application/json',
+    //     }
+    // });
+}
+</script>
