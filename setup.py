@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="hermes-notifier",
-    version="1.1.0",
+    version="1.2.0",
     author="Rafael Batista",
     author_email="raphab33@hotmail.com",
     description="Python/Django plugin for Hermes notifications system with SSE and push notification support",
